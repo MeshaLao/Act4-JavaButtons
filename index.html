@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildcats Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            margin: 20px auto; 
+            position: relative;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="date"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: maroon; 
+            color: white; 
+        }
+        .toggle-mode {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .font-size {
+            margin-top: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://cebudailynews.inquirer.net/files/2022/12/316482533_827244341875522_5011057238740691904_n.jpg" alt="Profile Picture" class="profile-img">
+        <h2>Technologian Information</h2>
+        <form id="userInfoForm">
+            <input type="text" placeholder="Name" id="nameInput">
+            <input type="text" placeholder="Age" id="ageInput">
+            <input type="date" id="birthdayInput">
+            <input type="text" placeholder="College Program" id="collegeInput">
+            <button type="button" onclick="submitForm()">Submit</button>
+        </form>
+        <div id="userInfo"></div>
+        <button class="prompt-button" id="promptButton" style="display: none;" onclick="askEnjoyment()">Click Here</button>
+
+        <!-- Dark/Light Mode Toggle Button -->
+        <button class="toggle-mode" onclick="toggleMode()">Dark Mode</button>
+
+        <!-- Font Size Adjustment Buttons -->
+        <div class="font-size">
+            <button onclick="decreaseFontSize()">-</button>
+            <button onclick="increaseFontSize()">+</button>
+        </div>
+    </div>
+
+    <script>
+        function submitForm() {
+            const name = document.getElementById('nameInput').value;
+            const age = document.getElementById('ageInput').value;
+            const birthday = document.getElementById('birthdayInput').value;
+            const collegeProgram = document.getElementById('collegeInput').value;
+
+            const userInfoDiv = document.getElementById('userInfo');
+            userInfoDiv.innerHTML = `
+                <h3>Technologian Information:</h3>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Age:</strong> ${age}</p>
+                <p><strong>Birthday:</strong> ${birthday}</p>
+                <p><strong>College Program:</strong> ${collegeProgram}</p>
+            `;
+
+            const promptButton = document.getElementById('promptButton');
+            promptButton.style.display = 'block';
+
+            // Create a button for redirection
+            const redirectButton = document.createElement('button');
+            redirectButton.textContent = 'Redirect to Activity 4.1';
+            redirectButton.addEventListener('click', function() {
+                window.location.href = 'file:///C:/Users/Mesha/OneDrive%20-%20Cebu%20Institute%20of%20Technology%20University/Documents/CSIT201/Activity%204.1%20Javascript%20Validation%20Form/index.html?#';
+            });
+
+            // Append the button to the container
+            userInfoDiv.appendChild(redirectButton);
+        }
+
+        function askEnjoyment() {
+            const enjoyment = prompt("Are you enjoying your time?");
+            if (enjoyment === null) {
+                return; // User clicked Cancel, do nothing
+            }
+            if (enjoyment.toLowerCase() === "yes") {
+                alert("Glad to hear that! Until next time!");
+            } else if (enjoyment.toLowerCase() === "no") {
+                const feedback = prompt("Oh no! Let us know how we can improve:");
+                if (feedback) {
+                    alert("Thank you for your feedback: " + feedback);
+                } else {
+                    alert("Thank you for your feedback!");
+                }
+            } else {
+                alert("Invalid input. Please type 'yes' or 'no'.");
+            }
+        }
+
+        let darkMode = false;
+        let fontSize = 16;
+
+        function toggleMode() {
+            darkMode = !darkMode;
+            const body = document.body;
+            const toggleButton = document.querySelector('.toggle-mode');
+            if (darkMode) {
+                body.style.backgroundColor = '#333';
+                body.style.color = '#333';
+                toggleButton.textContent = 'Light Mode';
+            } else {
+                body.style.backgroundColor = '#f0f0f0';
+                body.style.color = '#333';
+                toggleButton.textContent = 'Dark Mode';
+            }
+        }
+
+        function increaseFontSize() {
+            fontSize += 2;
+            document.body.style.fontSize = `${fontSize}px`;
+        }
+
+        function decreaseFontSize() {
+            if (fontSize > 12) {
+                fontSize -= 2;
+                document.body.style.fontSize = `${fontSize}px`;
+            }
+        }
+    </script>
+</body>
+</html>
